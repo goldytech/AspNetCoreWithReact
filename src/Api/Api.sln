@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthBackEnd", "AuthBackEnd\AuthBackEnd.csproj", "{689C4684-A75D-42D8-ADDC-27985DF2E0F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi", "CustomerApi\CustomerApi.csproj", "{BE3BAF5F-F005-401E-9F7F-A035553A7A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi", "OrderApi\OrderApi.csproj", "{0B7F5C98-174E-47A5-88A7-F3D82995D819}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{689C4684-A75D-42D8-ADDC-27985DF2E0F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{689C4684-A75D-42D8-ADDC-27985DF2E0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{689C4684-A75D-42D8-ADDC-27985DF2E0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{689C4684-A75D-42D8-ADDC-27985DF2E0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3BAF5F-F005-401E-9F7F-A035553A7A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3BAF5F-F005-401E-9F7F-A035553A7A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3BAF5F-F005-401E-9F7F-A035553A7A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3BAF5F-F005-401E-9F7F-A035553A7A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B7F5C98-174E-47A5-88A7-F3D82995D819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7F5C98-174E-47A5-88A7-F3D82995D819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7F5C98-174E-47A5-88A7-F3D82995D819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7F5C98-174E-47A5-88A7-F3D82995D819}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
