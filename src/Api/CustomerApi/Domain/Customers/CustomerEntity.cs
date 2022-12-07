@@ -1,9 +1,10 @@
-using CustomerApi.Common.Entities;
 using CustomerApi.Common.Models;
+using CustomerApi.Common.MongoDbServices;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace CustomerApi.Domain.Customers;
 
+[BsonCollection("Customers")]
 public class CustomerEntity : BaseEntity
 {
     [BsonElement("customer_id")]
