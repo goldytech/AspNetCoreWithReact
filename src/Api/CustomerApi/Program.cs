@@ -4,6 +4,7 @@ using CustomerApi.Core;
 using CustomerApi.Core.Validation;
 using CustomerApi.Domain.Customers;
 using CustomerApi.Domain.Customers.CreateCustomer;
+using CustomerApi.Domain.Customers.GetAllCustomers;
 using CustomerApi.Domain.Customers.GetSingleCustomer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,8 +39,14 @@ v1.MapPost("/customers", CreateCustomerEndpoint.CreateCustomer)
 v1.MapGet("/customers/{customerId}", GetSingleCustomerEndpoint.GetById)
     .Produces(StatusCodes.Status404NotFound)
     .Produces(StatusCodes.Status500InternalServerError)
-    .Produces<SingleCustomerResponseModel>(StatusCodes.Status200OK)
+    .Produces<SingleCustomerResponseDto>(StatusCodes.Status200OK)
     .WithName("GetById")
     .WithDisplayName("Get By Customer Id");
+
+v1.MapGet("/customers", GetAllCustomersEndpoint.GetAll)
+    .Produces(StatusCodes.Status500InternalServerError)
+    .Produces<List<GetAllCustomersResponseDto>>(StatusCodes.Status200OK)
+    .WithName("GetAll")
+    .WithDisplayName("Get All Customers");
 
 app.Run();

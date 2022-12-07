@@ -5,7 +5,7 @@ namespace CustomerApi.Domain.Customers.CreateCustomer;
 
 public class CreateCustomerEndpoint
 {
-    public static async Task<IResult> CreateCustomer([Validate]CreateCustomerRequestModel request, ICustomerService  customerService)
+    public static async Task<IResult> CreateCustomer([Validate]CreateCustomerRequestDto request, ICustomerService  customerService)
     {
         Result<string, Exception>? result = null;
         try

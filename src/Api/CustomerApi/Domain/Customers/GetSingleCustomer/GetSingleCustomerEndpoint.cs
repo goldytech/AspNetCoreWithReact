@@ -6,7 +6,7 @@ public class GetSingleCustomerEndpoint
 {
     public static async Task<IResult> GetById(string customerId, ICustomerService  customerService)
     {
-        Result<SingleCustomerResponseModel, Exception>? result = null;
+        Result<SingleCustomerResponseDto, Exception>? result = null;
         try
         {
             result = await customerService.GetCustomerByIdAsync(customerId);

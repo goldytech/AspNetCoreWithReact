@@ -10,15 +10,20 @@ public interface  IBaseEntity
    public ObjectId Id { get; set; }
     
     [BsonElement("created_at")]
+    [BsonRepresentation(BsonType.DateTime)]
     public DateTime CreatedAt { get; }
     
+    
     [BsonElement("updated_at")]
+    [BsonRepresentation(BsonType.DateTime)]
     public DateTime? UpdatedAt { get; set; } 
     
     [BsonElement("created_by")]
+    [BsonRepresentation(BsonType.String)]
     public string CreatedBy { get; set; }
     
     [BsonElement("updated_by")]
+    [BsonRepresentation(BsonType.String)]
     public string? UpdatedBy { get; set; }
 }
 
