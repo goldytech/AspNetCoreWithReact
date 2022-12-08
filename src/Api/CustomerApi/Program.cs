@@ -6,6 +6,7 @@ using CustomerApi.Domain.Customers;
 using CustomerApi.Domain.Customers.CreateCustomer;
 using CustomerApi.Domain.Customers.GetAllCustomers;
 using CustomerApi.Domain.Customers.GetSingleCustomer;
+using CustomerApi.Domain.Customers.UpdateSingleCustomer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -48,5 +49,12 @@ v1.MapGet("/customers", GetAllCustomersEndpoint.GetAll)
     .Produces<List<GetAllCustomersResponseDto>>(StatusCodes.Status200OK)
     .WithName("GetAll")
     .WithDisplayName("Get All Customers");
+
+v1.MapPut("/customers/{customerId}", UpdateSingleCustomerEndpoint.UpdateCustomer)
+    .Produces(StatusCodes.Status404NotFound)
+    .Produces(StatusCodes.Status500InternalServerError)
+    .Produces(StatusCodes.Status204NoContent)
+    .WithName("UpdateCustomer")
+    .WithDisplayName("Update Customer");
 
 app.Run();

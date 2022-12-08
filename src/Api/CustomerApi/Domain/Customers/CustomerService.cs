@@ -3,6 +3,7 @@ using CustomerApi.Core;
 using CustomerApi.Domain.Customers.CreateCustomer;
 using CustomerApi.Domain.Customers.GetAllCustomers;
 using CustomerApi.Domain.Customers.GetSingleCustomer;
+using CustomerApi.Domain.Customers.UpdateSingleCustomer;
 
 namespace CustomerApi.Domain.Customers;
 
@@ -77,6 +78,29 @@ class CustomerService : ICustomerService
             return Task.FromResult(Result<IEnumerable<GetAllCustomersResponseDto>, Exception>.FailWith(e));
         }
     }
-    
+
+    public async Task<Result<bool?, Exception>> UpdateCustomerAsync(string id, UpdateSingleCustomerRequestDto updateSingleCustomerRequestDto)
+    {
+        try
+        {
+            
+            var customer = await _customerRepository.FindOneAsync(x => x.Id.Equals(id));
+
+            if (string.IsNullOrEmpty(customer.Id.ToString()))
+            {
+                return Result<bool?, Exception>.SucceedWith(null);
+            }
+            customer.Name = updateSingleCustomerRequestDto.Name;
+            customer.Address.City = updateSingleCustomerRequestDto.City;
+            await _customerRepository.ReplaceOneAsync(customer);
+            return Result<bool?, Exception>.SucceedWith(true);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while updating customer");
+            return Result<bool?, Exception>.FailWith(e);
+        }
+        
+    }
 }
 
