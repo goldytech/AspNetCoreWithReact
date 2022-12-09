@@ -1,5 +1,3 @@
-using CustomerApi.Core;
-
 namespace CustomerApi.Domain.Customers.GetAllCustomers;
 
 public class GetAllCustomersEndpoint

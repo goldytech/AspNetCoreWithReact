@@ -1,6 +1,5 @@
 using CustomerApi.Common.Models;
 using CustomerApi.Common.MongoDbServices;
-using CustomerApi.Core;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;

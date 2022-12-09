@@ -1,6 +1,4 @@
 using CustomerApi.Common.Logging;
-using CustomerApi.Common.Models;
-using CustomerApi.Core;
 using CustomerApi.Core.Validation;
 using CustomerApi.Domain.Customers;
 using CustomerApi.Domain.Customers.CreateCustomer;
@@ -11,6 +9,7 @@ using CustomerApi.Domain.Customers.UpdateSingleCustomer;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 
 
@@ -28,7 +27,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// This is for testing purpose, should not be enabled in production
+app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); 
 var v1 = app.MapGroup("/api/v1");
 
 v1.MapPost("/customers", CreateCustomerEndpoint.CreateCustomer)

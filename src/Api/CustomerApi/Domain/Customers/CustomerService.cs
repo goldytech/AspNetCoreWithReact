@@ -7,7 +7,7 @@ using CustomerApi.Domain.Customers.UpdateSingleCustomer;
 
 namespace CustomerApi.Domain.Customers;
 
-class CustomerService : ICustomerService
+public class CustomerService : ICustomerService
 {
     private readonly IRepository<CustomerEntity> _customerRepository;
     private readonly ILogger<CustomerService> _logger;
