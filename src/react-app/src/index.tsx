@@ -5,10 +5,12 @@ import App from './main/App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {QueryClient,QueryClientProvider} from "react-query";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+axios.defaults.withCredentials = true;
 const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>

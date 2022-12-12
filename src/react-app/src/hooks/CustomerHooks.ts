@@ -4,7 +4,7 @@ import {useQuery} from "react-query";
 
 const useFetchCustomers = () => {
     return useQuery<Customer[],AxiosError>('customers', () => {
-        return axios.get<Customer[]>('https://localhost:7127/api/v1/customers')
+        return axios.get<Customer[]>('api/customers')
             .then(response => response.data)
     })
 }
