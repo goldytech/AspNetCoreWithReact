@@ -14,7 +14,7 @@ public class AccountController : Controller
 
     public AccountController(IUserRepository userRepository)
     {
-        this._userRepository = userRepository;
+        _userRepository = userRepository;
     }
 
     public IActionResult Login()
@@ -44,7 +44,7 @@ public class AccountController : Controller
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, 
             new AuthenticationProperties { IsPersistent = model.RememberMe });
 
-        return Redirect("");
+        return Redirect("/");
     }
 
     [Authorize]
@@ -55,8 +55,7 @@ public class AccountController : Controller
     }
 
     
-    [Authorize]
-    public IActionResult GetUser()
+        public IActionResult GetUser()
     {
         return new JsonResult(User.Claims.Select(c => new { c.Type, c.Value }));
     }

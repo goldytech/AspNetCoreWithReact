@@ -10,11 +10,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "__Host-spa";
         options.Cookie.SameSite = SameSiteMode.Strict;
        // options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.Events.OnRedirectToLogin = context =>
-        {
-            context.Response.StatusCode = 401;
-            return Task.CompletedTask;
-        };
+        // options.Events.OnRedirectToLogin = context =>
+        // {
+        //     context.Response.StatusCode = 401;
+        //     return Task.CompletedTask;
+        // };
     });
 builder.Services.AddAuthorization(options =>
 {

@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi", "OrderApi\OrderA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApi.Tests", "..\..\tests\CustomerApi.Tests\CustomerApi.Tests.csproj", "{2D391F28-5B84-4936-BAFB-A888EC78FCAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthApi", "AuthApi\AuthApi.csproj", "{B21428C4-921B-4BBF-8842-361D9ECE4F23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendForFrontend", "BackendForFrontend\BackendForFrontend.csproj", "{6C5D8D66-DA81-4D0D-85F8-0336C9A24788}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{2D391F28-5B84-4936-BAFB-A888EC78FCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D391F28-5B84-4936-BAFB-A888EC78FCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D391F28-5B84-4936-BAFB-A888EC78FCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B21428C4-921B-4BBF-8842-361D9ECE4F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B21428C4-921B-4BBF-8842-361D9ECE4F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B21428C4-921B-4BBF-8842-361D9ECE4F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B21428C4-921B-4BBF-8842-361D9ECE4F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C5D8D66-DA81-4D0D-85F8-0336C9A24788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C5D8D66-DA81-4D0D-85F8-0336C9A24788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C5D8D66-DA81-4D0D-85F8-0336C9A24788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C5D8D66-DA81-4D0D-85F8-0336C9A24788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
