@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "dc5ec4e3-4455-4656-b74d-a6215c943dc2",
+		"name": "PareIT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "699985"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\": \"admin\",\n  \"clientSecret\": \"123\",\n  \"audience\": \"bff\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5135/Auth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5135",
+					"path": [
+						"Auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123\",\n  \"rememberMe\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5135/Auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5135",
+					"path": [
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123\",\n  \"rememberMe\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5135/Auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5135",
+					"path": [
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers Direct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImQzM2E5ZTdiLTdjNWYtNDJmYy1iZjA5LWQwN2NjOWRhZjQxNSIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiOWM4NzQwMmItMTc1ZC00MTc5LWJjMjctZjZlYWIwNzlhMmVmIiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxMTAwMDE3LCJleHAiOjE2NzExMDM2MTcsImlhdCI6MTY3MTEwMDAxNywiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJjdXN0b21lcnMtYXBpIn0.mZrYvf5tyzRdi0sYrcZAQ-YWUW4jbTfBh_7i2-mTe2inoUsVdTaZatL9tOc8lpaduO1PUyNZDcncHjfWFMdldA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5199/api/v1/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5199",
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers (BFF)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjQ1MmVjZThiLTAzN2QtNGYwMC1iYjA3LWU3ZmUxZDgxY2EwYiIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiOWMwMGU4N2ItZWUyNC00MDY2LWIxYmEtMzg5N2I4ZjYwZGNlIiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxMTkzNTcyLCJleHAiOjE2NzExOTcxNzIsImlhdCI6MTY3MTE5MzU3MiwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.TA_MlXuUbd6yMAkAcic1V9u4cqG2MwK9PuBfhpMDoXhSm9LDUc6rMp-3RtI4SrHA5kmPxPWftKumE6pX9x5XKw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5243/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5243",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer (BFF)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjM3Njc3ZDEzLWY4YTUtNDQ2NS05YzJkLWNmZjg3YjA5YjJiMiIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiMmJjMWE2NTUtOGYwZi00OTYwLWJiNjAtNTUyYjZjNmQ4NjdkIiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxMTkyMTk4LCJleHAiOjE2NzExOTU3OTgsImlhdCI6MTY3MTE5MjE5OCwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.phieYPAEOKPMFNdPuY22Hb-bjQZK1c0CKkoaFe5MhIFu4Fn25-SODGwtGJOw405P2dmRE4bcV8OXzgzzpqeoiA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"\",\n  \"customerId\": 130,\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5243/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5243",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer By Id (BFF)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjQ1MmVjZThiLTAzN2QtNGYwMC1iYjA3LWU3ZmUxZDgxY2EwYiIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiOWMwMGU4N2ItZWUyNC00MDY2LWIxYmEtMzg5N2I4ZjYwZGNlIiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxMTkzNTcyLCJleHAiOjE2NzExOTcxNzIsImlhdCI6MTY3MTE5MzU3MiwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.TA_MlXuUbd6yMAkAcic1V9u4cqG2MwK9PuBfhpMDoXhSm9LDUc6rMp-3RtI4SrHA5kmPxPWftKumE6pX9x5XKw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5243/customers/6390a4becc65bd9c84484870",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5243",
+					"path": [
+						"customers",
+						"6390a4becc65bd9c84484870"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

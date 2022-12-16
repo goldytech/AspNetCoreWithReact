@@ -18,10 +18,16 @@
       <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.25.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />  
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Common\Entities" />
+      <Folder Include="dapr" />
     </ItemGroup>
 
 </Project>

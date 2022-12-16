@@ -1,10 +1,11 @@
 ﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:20679",
-      "sslPort": 44381
+      "applicationUrl": "http://localhost:62249",
+      "sslPort": 44315
     }
   },
   "profiles": {
@@ -13,7 +14,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5199",
+      "applicationUrl": "http://localhost:5135",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -23,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7127;http://localhost:5199",
+      "applicationUrl": "https://localhost:7099;http://localhost:5135",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -31,18 +32,9 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "dapr-self-hosted-customers-api": {
-      "commandName": "Executable",
-      "executablePath": " dapr",
-      "commandLineArgs": "run --app-id customers-api --app-port 5199 --dapr-http-port 3501 --components-path ./dapr dotnet run",
-      "workingDirectory": "$(ProjectDir)",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-
       }
     }
   }

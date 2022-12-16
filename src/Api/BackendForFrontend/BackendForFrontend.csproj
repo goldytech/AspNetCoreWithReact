@@ -14,7 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapr.Client" Version="1.9.0" />
+      <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.25.1" />
     </ItemGroup>
 
 </Project>

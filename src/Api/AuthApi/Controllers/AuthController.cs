@@ -20,63 +20,78 @@ public class AuthController : ControllerBase
     {
         _config = config.Value;
     }
+
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
     {
-        if (loginModel is { Username: "admin", Password: "123" })
+        if (loginModel is not { Username: "admin", Password: "123" }) return Unauthorized();
+        var claims = new List<Claim>
         {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, loginModel.Username),
-                new Claim(ClaimTypes.Role, "admin"),
-            };
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var authProperties = new AuthenticationProperties
-            {
-                AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
-                IsPersistent = loginModel.RememberMe,
-                IssuedUtc = DateTimeOffset.UtcNow,
-            };
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-            return Ok();
-        }
-        return Unauthorized();
+            new(ClaimTypes.Name, loginModel.Username),
+            new(ClaimTypes.Role, "admin"),
+        };
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var authProperties = new AuthenticationProperties
+        {
+            AllowRefresh = true,
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
+            IsPersistent = loginModel.RememberMe,
+            IssuedUtc = DateTimeOffset.UtcNow,
+        };
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentity), authProperties);
+        return Ok();
+    }
+    
+    [HttpPost]
+    [Route("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return Ok();
     }
 
     [HttpPost]
-    [Route("login2")]
-    public async Task<IActionResult> Login2([FromBody] TokenModel tokenModel)
+    [Route("token")]
+    public IActionResult Token([FromBody] TokenModel tokenModel)
     {
-        if (tokenModel is { Username: "admin", Password: "123" })
-        {
-            var tokenResponse = new TokenResponse(GenerateToken(tokenModel));
-            return Ok(tokenResponse);
-        }
+        if (tokenModel is not { ClientId: "admin", ClientSecret: "123" }) return Unauthorized();
+        var tokenResponse = new TokenResponse(GenerateToken(tokenModel));
+        return Ok(tokenResponse);
 
-        return Unauthorized();
     }
-    
-    
+
+
     private string GenerateToken(TokenModel tokenModel)
     {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.Key));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-        var claims = new[]
+        var issuer = _config.Issuer;
+        var audience = tokenModel.Audience;
+        var key = Encoding.ASCII.GetBytes
+            (_config.Key);
+        var tokenDescriptor = new SecurityTokenDescriptor
         {
-            new Claim(ClaimTypes.NameIdentifier,tokenModel.Username),
-            new Claim(ClaimTypes.Role,"admin")
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim("Id", Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, tokenModel.ClientId),
+                new Claim(JwtRegisteredClaimNames.Name, tokenModel.ClientId),
+                new Claim(JwtRegisteredClaimNames.Jti,
+                    Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, "admin"),
+            }),
+            Expires = DateTime.UtcNow.AddMinutes(60),
+            Issuer = issuer,
+            Audience = audience,
+            SigningCredentials = new SigningCredentials
+            (new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha512Signature)
         };
-        var token = new JwtSecurityToken(_config.Issuer,
-            tokenModel.Audience,
-            claims,
-            expires: DateTime.Now.AddMinutes(15),
-            signingCredentials: credentials);
-
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
-
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var jwtToken = tokenHandler.WriteToken(token);
+        var stringToken = tokenHandler.WriteToken(token);
+        return stringToken;
     }
-
 }
+
