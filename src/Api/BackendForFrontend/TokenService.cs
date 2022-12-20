@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.Json;
 using BackendForFrontend.Dto;
 using Dapr.Client;
 
@@ -8,6 +6,7 @@ namespace BackendForFrontend;
 public interface ITokenService
 {
     Task<string?> GetJwtTokenForApi(string audience, DaprClient daprClient);
+    Task<string?> GetJwtTokenForApi2(string audience, DaprClient daprClient);
 }
 
 public class TokenService : ITokenService
@@ -54,6 +53,32 @@ public class TokenService : ITokenService
             tokenResponse?.AccessToken,metadata: metaData);
         _logger.LogInformation(3, "Token saved in state store");
         return tokenResponse?.AccessToken;
+
+    }
+
+    public async Task<string?> GetJwtTokenForApi2(string audience, DaprClient daprClient)
+    {
+        var token = await daprClient.GetStateAsync<string>("statestore", $"token-{audience}");
+        if (!string.IsNullOrEmpty(token))
+        {
+            _logger.LogInformation(1, "Token found in state store");
+            return token;
+        }
+        _logger.LogInformation(2, "Token not found in state store, requesting new token");
+        // invoking the auth service with dapr client to get the token method #1   
+        var tokenResponse =  await daprClient.InvokeMethodAsync<TokenModel, TokenResponse>
+           (HttpMethod.Post, "auth-api","/auth/token", new TokenModel("admin","123", audience));
+           _logger.LogDebug("Got token from auth service {Token}", tokenResponse);
+        
+           _logger.LogDebug("Access Token retrieved from auth service {AccessToken}", tokenResponse.AccessToken);
+           var metaData = new Dictionary<string, string>
+           {
+               ["ttlInSeconds"] = "3600" // This should be similar or less than token expiration time
+           };
+           await daprClient.SaveStateAsync("statestore", $"token-{audience}", 
+               tokenResponse?.AccessToken,metadata: metaData);
+           _logger.LogInformation(3, "Token saved in state store");
+           return tokenResponse?.AccessToken;
 
     }
 }

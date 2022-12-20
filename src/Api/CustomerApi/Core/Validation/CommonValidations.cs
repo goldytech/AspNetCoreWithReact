@@ -1,7 +1,7 @@
 using System.Net;
 using System.Reflection;
 using FluentValidation;
-
+// This should be generated via Source Generator to avoid transitive dependencies
 namespace CustomerApi.Core.Validation;
 
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]

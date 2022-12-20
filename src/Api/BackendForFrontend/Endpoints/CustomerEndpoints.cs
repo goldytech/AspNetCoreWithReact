@@ -26,7 +26,7 @@ internal static class CustomerEndpoints
             {
                 var request = daprClient.CreateInvokeMethodRequest(HttpMethod.Get, "customers-api",
                     "api/v1/customers");
-                var token = await tokenService.GetJwtTokenForApi("customers-api", daprClient);
+                var token = await tokenService.GetJwtTokenForApi2("customers-api", daprClient);
                 if (token is null)
                 {
                     // Was unable to retrieve token. Hence returning 500 response.
@@ -64,8 +64,9 @@ internal static class CustomerEndpoints
             var logger = loggerFactory.CreateLogger("CustomerEndpoints");
             try
             {
+               // invoking the service to service communication with Dapr Client using HttpClient method #2
                 var httpClient = DaprClient.CreateInvokeHttpClient("customers-api");
-                var token = await tokenService.GetJwtTokenForApi("customers-api", daprClient);
+                var token = await tokenService.GetJwtTokenForApi2("customers-api", daprClient);
                 if (token is null)
                 {
                     // Was unable to retrieve token. Hence returning 500 response.
@@ -114,9 +115,10 @@ internal static class CustomerEndpoints
             var logger = loggerFactory.CreateLogger("CustomerEndpoints");
             try
             {
+                // method #3 of invoking the service to service communication with Dapr Client
                 var request = daprClient.CreateInvokeMethodRequest(HttpMethod.Get, "customers-api",
                     $"api/v1/customers/{id}");
-                var token = await tokenService.GetJwtTokenForApi("customers-api", daprClient);
+                var token = await tokenService.GetJwtTokenForApi2("customers-api", daprClient);
                 if (token is null)
                 {
                     // Was unable to retrieve token. Hence returning 500 response.
