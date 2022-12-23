@@ -39,8 +39,8 @@
     },
     "dapr-self-hosted-auth": {
       "commandName": "Executable",
-      "executablePath": " dapr",
-      "commandLineArgs": "run --app-id auth-api --app-port 5135 --dapr-http-port 3502 --components-path ./dapr dotnet run",
+      "executablePath": "dapr",
+      "commandLineArgs": "run --app-id auth-api --app-port 5135 --dapr-http-port 3502 --components-path ./dapr-components/ dotnet run",
       "workingDirectory": "$(ProjectDir)",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

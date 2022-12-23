@@ -37,8 +37,8 @@
     },
     "dapr-self-hosted-customers-api": {
       "commandName": "Executable",
-      "executablePath": " dapr",
-      "commandLineArgs": "run --app-id customers-api --app-port 5199 --dapr-http-port 3501 --components-path ./dapr dotnet run",
+      "executablePath": "dapr",
+      "commandLineArgs": "run --app-id customers-api --app-port 5199 --dapr-http-port 3501 --components-path ./dapr-components/ dotnet run",
       "workingDirectory": "$(ProjectDir)",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

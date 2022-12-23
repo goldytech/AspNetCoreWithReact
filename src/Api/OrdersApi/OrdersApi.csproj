@@ -8,13 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
