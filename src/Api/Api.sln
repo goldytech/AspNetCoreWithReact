@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendForFrontend", "Backe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersApi", "OrdersApi\OrdersApi.csproj", "{9B1859E4-668C-4DD5-959E-CCE607F4F529}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Notifications", "SignalR.Notifications\SignalR.Notifications.csproj", "{E96A7AEF-178A-4EA2-9895-0F56D87CE29E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{9B1859E4-668C-4DD5-959E-CCE607F4F529}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B1859E4-668C-4DD5-959E-CCE607F4F529}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B1859E4-668C-4DD5-959E-CCE607F4F529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96A7AEF-178A-4EA2-9895-0F56D87CE29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96A7AEF-178A-4EA2-9895-0F56D87CE29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96A7AEF-178A-4EA2-9895-0F56D87CE29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96A7AEF-178A-4EA2-9895-0F56D87CE29E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

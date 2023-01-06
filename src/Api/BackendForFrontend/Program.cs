@@ -17,6 +17,16 @@ builder.Services.AddDaprClient(clientBuilder =>
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITokenService, TokenService>();
     
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("react-app", builder =>
+    {
+        builder.WithOrigins("http://localhost:3001")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // Credentials should be allowed so that cookie can be transferred with every request
+    });
+});
 
 
 builder.Services.AddAuthentication(options =>
@@ -41,6 +51,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+app.UseCors("react-app");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -60,6 +61,13 @@ public class AuthController : ControllerBase
         var tokenResponse = new TokenResponse(GenerateToken(tokenModel));
         return Ok(tokenResponse);
 
+    }
+    
+      [HttpGet]
+      [Route("userinfo")]
+    public IActionResult GetUser()
+    {
+        return new JsonResult(User.Claims.Select(c => new { Type=c.Type, Value=c.Value }));
     }
 
 

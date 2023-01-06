@@ -11,7 +11,7 @@ public class OrderController : ControllerBase
 {
     private readonly ILogger<OrderController> _logger;
     private readonly DaprClient _daprClient;
-    private const string PubSubName = "redis-pubsub";
+    private const string PubSubName = "rabbitmq-pubsub";
 
     public OrderController(ILogger<OrderController> logger, DaprClient daprClient)
     {
