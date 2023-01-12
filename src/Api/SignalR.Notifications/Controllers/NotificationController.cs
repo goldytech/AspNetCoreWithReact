@@ -17,7 +17,7 @@ public class NotificationController : ControllerBase
     [Route("api/notification")]
     public async Task<IActionResult> Post([FromBody] Notification notification)
     {
-      await _notificationHub.UpdateUI(notification);
+      await _notificationHub.UpdateUIAsync(notification);
       return Ok();
     }
    

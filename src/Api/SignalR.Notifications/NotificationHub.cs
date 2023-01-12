@@ -5,7 +5,7 @@ namespace SignalR.Notifications;
 public class NotificationHub : Hub
 
 {
-    public async Task UpdateUI(Notification notification)
+    public async Task UpdateUIAsync(Notification notification)
     {
         var groupName = $"fe-{notification.CaseId}";
         // Send the notification to the group.
@@ -13,7 +13,7 @@ public class NotificationHub : Hub
         
     }
     
-    public async Task JoinGroup(string groupName)
+    public async Task JoinGroupAsync(string groupName)
     {
         var groupWithPrefix = $"fe-{groupName}";
         // Create the group if it doesn't exist.
@@ -35,6 +35,6 @@ public class NotificationHub : Hub
 
 public class Notification
 {
-    public string Message { get; set; }
-    public string CaseId { get; set; }
+    public string? Message { get; set; }
+    public string? CaseId { get; set; }
 }
