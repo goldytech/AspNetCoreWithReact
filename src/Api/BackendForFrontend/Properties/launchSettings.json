@@ -38,6 +38,7 @@
       "executablePath": "dapr",
       "commandLineArgs": "run --app-id bff --app-port 5243 --dapr-http-port 3500 --components-path ./dapr-components dotnet run",
       "workingDirectory": "$(ProjectDir)",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
         

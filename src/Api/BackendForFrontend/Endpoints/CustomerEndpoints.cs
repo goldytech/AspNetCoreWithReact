@@ -3,7 +3,9 @@ using System.Net.Http.Headers;
 using BackendForFrontend.Dto;
 using Dapr;
 using Dapr.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 
 namespace BackendForFrontend.Endpoints;
 
@@ -18,43 +20,54 @@ internal static class CustomerEndpoints
         var customersGroup = endpoints.MapGroup("/customers");
         customersGroup.RequireAuthorization();
         customersGroup.MapGet("/", async ([FromServices] ILoggerFactory loggerFactory,
-            [FromServices] ITokenService tokenService,
-            [FromServices] DaprClient daprClient) =>
-        {
-            var logger = loggerFactory.CreateLogger("CustomerEndpoints");
-            try
+                [FromServices] ITokenService tokenService,
+                [FromServices] DaprClient daprClient) =>
             {
-                var request = daprClient.CreateInvokeMethodRequest(HttpMethod.Get, "customers-api",
-                    "api/v1/customers");
-                var token = await tokenService.GetJwtTokenForApi2("customers-api", daprClient);
-                if (token is null)
+                var logger = loggerFactory.CreateLogger("CustomerEndpoints");
+                try
                 {
-                    // Was unable to retrieve token. Hence returning 500 response.
-                    return Results.Problem("Failed to get token for customers-api");
+                    var request = daprClient.CreateInvokeMethodRequest(HttpMethod.Get, "customers-api",
+                        "api/v1/customers");
+                    var token = await tokenService.GetJwtTokenForApi2("customers-api", daprClient);
+                    if (token is null)
+                    {
+                        // Was unable to retrieve token. Hence returning 500 response.
+                        return Results.Problem("Failed to get token for customers-api");
+                    }
+
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer",
+                        token);
+
+                    var customers = await daprClient.InvokeMethodAsync<IEnumerable<GetAllCustomersResponseDto>>
+                        (request);
+
+                    var customersList = customers
+                        .Select(dto => new Customer(dto.Id, dto.Name, emails[Random.Shared.Next(emails.Length)]))
+                        .ToList();
+
+                    return Results.Ok(customersList);
                 }
-
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer",
-                    token);
-
-                var customers = await daprClient.InvokeMethodAsync<IEnumerable<GetAllCustomersResponseDto>>
-                    (request);
-
-                var customersList = customers
-                    .Select(dto => new Customer(dto.Id, dto.Name, emails[Random.Shared.Next(emails.Length)])).ToList();
-
-                return Results.Ok(customersList);
-            }
-            catch (DaprException e)
+                catch (DaprException e)
+                {
+                    logger.LogError(e, "Dapr Exception : Error while getting customers");
+                    return Results.Problem("Error while getting customers");
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e, "General Exception : Error while getting customers");
+                    return Results.Problem("Error while getting customers");
+                }
+            }).WithName("GetCustomers")
+            .WithDescription("Get all customers list")
+            .WithOpenApi(operation =>
             {
-                logger.LogError(e, "Dapr Exception : Error while getting customers");
-                return Results.Problem("Error while getting customers");
-            }
-            catch (Exception e)
-            {
-                logger.LogError(e, "General Exception : Error while getting customers");
-                return Results.Problem("Error while getting customers");
-            }
-        });
+                operation.Security = new List<OpenApiSecurityRequirement>
+                {
+                    GetDefaultSecurityRequirement()
+                };
+                return operation;
+            });
+        
 
         customersGroup.MapPost("/", async ([FromServices] ILoggerFactory loggerFactory,
             [FromBody] CreateCustomerRequestDto requestDto,
@@ -106,7 +119,16 @@ internal static class CustomerEndpoints
                 logger.LogError(e, "General Exception : Error while creating customer");
                 return Results.Problem("Error while getting customer");
             }
-        });
+        }).WithName("CreateCustomer")
+            .WithDescription("Create a new Customer")
+            .WithOpenApi(operation =>
+            {
+                operation.Security = new List<OpenApiSecurityRequirement>
+                {
+                    GetDefaultSecurityRequirement()
+                };
+                return operation;
+            });
         customersGroup.MapGet("/{id}", async ([FromServices] ILoggerFactory loggerFactory,
             [FromRoute] string id,
             [FromServices] ITokenService tokenService,
@@ -144,4 +166,30 @@ internal static class CustomerEndpoints
         });
         return customersGroup;
     }
+
+    private static OpenApiSecurityRequirement GetDefaultSecurityRequirement()
+    {
+        return new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = JwtBearerDefaults.AuthenticationScheme
+                    },
+                    Scheme = SecuritySchemeType.Http.ToString(),
+                    Name = JwtBearerDefaults.AuthenticationScheme
+                },
+                new List<string>()
+
+
+            }
+        };
+    }
+
+
+    
+
 }

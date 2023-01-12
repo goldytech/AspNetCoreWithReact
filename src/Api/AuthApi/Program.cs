@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,7 @@ app.MapControllers();
 
 app.Run();
 
+
 public record LoginModel(string Username, string Password, bool RememberMe);
 public record TokenModel(string ClientId, string ClientSecret, string Audience);
 
@@ -65,4 +67,3 @@ public class JwtSettings
 }
 
 public record TokenResponse(string AccessToken);
-

@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123\",\n  \"rememberMe\": true\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,7 +79,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5135/Auth/login",
+					"raw": "http://localhost:5135/Auth/logout",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -87,7 +87,7 @@
 					"port": "5135",
 					"path": [
 						"Auth",
-						"login"
+						"logout"
 					]
 				}
 			},
@@ -131,7 +131,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjQ1MmVjZThiLTAzN2QtNGYwMC1iYjA3LWU3ZmUxZDgxY2EwYiIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiOWMwMGU4N2ItZWUyNC00MDY2LWIxYmEtMzg5N2I4ZjYwZGNlIiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxMTkzNTcyLCJleHAiOjE2NzExOTcxNzIsImlhdCI6MTY3MTE5MzU3MiwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.TA_MlXuUbd6yMAkAcic1V9u4cqG2MwK9PuBfhpMDoXhSm9LDUc6rMp-3RtI4SrHA5kmPxPWftKumE6pX9x5XKw",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImVkMjJkODM0LTc1NDMtNDEzYi1hNWJjLWU0OGEzOTMyNjE0MCIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiNTBhNDdkZjgtMTg1NS00YThlLWFmMzctYTdkMGRhODk2MTU3Iiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcxNTIwNTU4LCJleHAiOjE2NzE1MjQxNTgsImlhdCI6MTY3MTUyMDU1OCwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.XEnfeZzfN6EPEzD4tZuU8BR_bUcyBnxi2Ffv5u43-FfbjIV0lldfB4IP5fTbJzRIUd60Vy9HRKuzLYfJ5G3weQ",
 						"type": "text"
 					}
 				],
@@ -143,6 +143,35 @@
 					],
 					"port": "5243",
 					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers (Dapr-BFF)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImQ5MmJkMTI2LWUwY2MtNGU3Ny04MDcyLTJmNmMyMWIzNmE4MCIsInN1YiI6ImFkbWluIiwibmFtZSI6ImFkbWluIiwianRpIjoiYmU5OTc0OTktYzUzMC00NTdiLWJmMDctN2Y3MTY0NDM5N2Y3Iiwicm9sZSI6ImFkbWluIiwibmJmIjoxNjcyOTIwMDY1LCJleHAiOjE2NzI5MjM2NjUsImlhdCI6MTY3MjkyMDA2NSwiaXNzIjoiIGh0dHA6Ly9sb2NhbGhvc3Q6NTEzNS8iLCJhdWQiOiJiZmYifQ.FZ_g9qyCs-7qj_xpnB9ov_FrcOZSZ2wSund1OR-lzelKfgU88bv75q1-6l2lMr09EBFjzMsjZiwmTISJYKf-IA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3500/v1.0/invoke/bff/method/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"v1.0",
+						"invoke",
+						"bff",
+						"method",
 						"customers"
 					]
 				}
@@ -204,6 +233,35 @@
 					"path": [
 						"customers",
 						"6390a4becc65bd9c84484870"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Submit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 123,\n    \"name\": \"test\",\n    \"lineItems\": [\n        {\n            \"id\":1,\n            \"name\": \"test-1\",\n            \"description\": \"description-1\"\n        },\n        {\n            \"id\":2,\n            \"name\": \"test-2\",\n            \"description\": \"description-2\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5137/order/submit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5137",
+					"path": [
+						"order",
+						"submit"
 					]
 				}
 			},
